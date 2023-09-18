@@ -34,11 +34,7 @@ Route::get('/store/{category?}/{item?}', function ($category=null, $item=null) {
     }
 });
 
-Route::get('/contact', function () {
-    //return view('welcome');
-    return '<h1>Contact Page</h1>';
-    
-});
+
 
 
 Route::get('/dashboard', function () {
