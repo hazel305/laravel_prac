@@ -828,15 +828,15 @@
     }
   }
   </style>
-  <link rel="stylesheet" href="css/site.css">
+  <link rel="stylesheet" href="{{url('css/site.css')}}">
 </head>
 
 <body class="antialiased">
   <div class="p-4">
     <nav>
-      <a href="/">Home</a>
-      <a href="/about">about</a>
-      <a href="/contact">contact</a>
+      <a href="{{route('home.index')}}">Home</a>
+      <a href="{{route('home.about')}}">about</a>
+      <a href="{{route('home.contact')}}">contact</a>
     </nav>
   </div>
   <div
