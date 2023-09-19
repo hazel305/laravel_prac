@@ -6,7 +6,7 @@
   @if(count($bikes)>0)
   @foreach($bikes as $bike)
   <div>
-    <h3>{{$bike['name']}}</h3>
+    <h3><a href="{{route('bikes.show',['bike'=>$bike['id']])}}">{{$bike['name']}}</a></h3>
     <p>Made by : {{$bike['brand']}}</p>
   </div>
 

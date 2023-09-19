@@ -48,9 +48,15 @@ class BikeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $bike)
     {
         //
+        $bikes = self::getData();
+        //$index = $bike - 1;
+        $index = array_search($bike, array_column($bikes, 'id'));
+        return view('bikes.show', [
+            'bike'=>$bikes[$index]
+        ]);
     }
 
     /**
