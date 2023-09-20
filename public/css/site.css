@@ -9,3 +9,23 @@ nav {
     display: flex;
     gap: 15px;
 }
+
+.border-1 {
+    border-width: 0.07rem;
+}
+.form {
+    background: #fff;
+}
+.form div {
+    margin-bottom: 15px;
+}
+.form div > input {
+    display: block;
+}
+.form div > button {
+    padding: 5px;
+}
+
+.error {
+    color: red;
+}
