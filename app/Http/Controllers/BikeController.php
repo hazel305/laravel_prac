@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Bike;
+use App\Http\Requests\BikeFormRequest;
+
 
 class BikeController extends Controller
 {
@@ -43,18 +45,23 @@ class BikeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+
+    public function store(BikeFormRequest $request)
     {
-        $request->validate([
-            'bike-name'=>'required',
-            'bike-brand'=>'required',
-            'bike-price'=>'required', 'integer'
-        ]);
+        $data = $request->validated();
+        // $request->validate([
+        //     'bike-name'=>'required',
+        //     'bike-brand'=>'required',
+        //     'bike-price'=>'required', 'integer'
+        // ]);
         //
         $bike = new Bike();//Bike모델을 이용해서, 디비 연결하고 그 결과를  객체로 저장.
-        $bike->name = strip_tags($request->input('bike-name'));
-        $bike->brand = strip_tags($request->input('bike-brand'));
-        $bike->price = strip_tags($request->input('bike-price'));
+        $bike->name = $data['bike-name'];
+        $bike->brand = $data['bike-brand'];
+        $bike->price = $data['bike-price'];
+        // $bike->name = strip_tags($request->input('bike-name'));
+        // $bike->brand = strip_tags($request->input('bike-brand'));
+        // $bike->price = strip_tags($request->input('bike-price'));
 
         $bike->save();
         return redirect()->route('bikes.index');
@@ -63,7 +70,7 @@ class BikeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $bike)
+    public function show(Bike $bike)
     {
         //
         // $bikes = self::getData();
@@ -72,40 +79,51 @@ class BikeController extends Controller
         
         
         return view('bikes.show', [
-            'bike'=>Bike::findOrFail($bike)
+            // 'bike'=>Bike::findOrFail($bike)
+            //'bike'=>Bike $bike
+            'bike'=>$bike
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $bike)
+    public function edit(Bike $bike)
     {
         //
          return view('bikes.edit', [
-            'bike'=>Bike::findOrFail($bike)
+            // 'bike'=>Bike::findOrFail($bike)
+            'bike'=>$bike
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    // public function update(Request $request, string $id)
+    public function update(BikeFormRequest $request, Bike $bike)
+    
     {
         //
-         $request->validate([
-            'bike-name'=>'required',
-            'bike-brand'=>'required',
-            'bike-price'=>'required', 'integer'
-        ]);
+        //  $request->validate([
+        //     'bike-name'=>'required',
+        //     'bike-brand'=>'required',
+        //     'bike-price'=>'required', 'integer'
+        // ]);
+         $data = $request->validated();
         //
-        $record = Bike::findOrFail($id);
-        $record->name = strip_tags($request->input('bike-name'));
-        $record->brand = strip_tags($request->input('bike-brand'));
-        $record->price = strip_tags($request->input('bike-price'));
+        // $record = Bike::findOrFail($id);
+        
+        $bike->name = $data['bike-name'];
+        $bike->brand = $data['bike-brand'];
+        $bike->price = $data['bike-price'];
+        
+        // $bike->name = strip_tags($request->input('bike-name'));
+        // $bike->brand = strip_tags($request->input('bike-brand'));
+        // $bike->price = strip_tags($request->input('bike-price'));
 
-        $record->save();
-        return redirect()->route('bikes.show',$id);
+        $bike->save();
+        return redirect()->route('bikes.show',$bike->id);
         
     }
 
