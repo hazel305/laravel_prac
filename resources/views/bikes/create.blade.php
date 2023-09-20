@@ -8,21 +8,21 @@
     @csrf
     <div>
       <label class="text-sm" for="bike-name">Bike name</label>
-      <input class="text-lg border-1" type="text" id="bike-name" name="bike-name">
+      <input class="text-lg border-1" type="text" id="bike-name" name="bike-name" value="{{old('bike-name')}}">
       @error('bike-name')
       <p class="error">{{$message}}</p>
       @enderror
     </div>
     <div>
       <label class="text-sm" for="bike-price">Bike Price</label>
-      <input class="text-lg border-1" type="text" id="bike-price" name="bike-price">
+      <input class="text-lg border-1" type="text" id="bike-price" name="bike-price" value="{{old('bike-price')}}">
       @error('bike-price')
       <p class="error">{{$message}}</p>
       @enderror
     </div>
     <div>
       <label class="text-sm" for="bike-brand">Bike Brand</label>
-      <input class="text-lg border-1" type="text" id="bike-brand" name="bike-brand">
+      <input class="text-lg border-1" type="text" id="bike-brand" name="bike-brand" value="{{old('bike-brand')}}">
       @error('bike-brand')
       <p class="error">{{$message}}</p>
       @enderror
