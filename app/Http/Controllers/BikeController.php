@@ -66,11 +66,13 @@ class BikeController extends Controller
     public function show(string $bike)
     {
         //
-        $bikes = self::getData();
+        // $bikes = self::getData();
         //$index = $bike - 1;
-        $index = array_search($bike, array_column($bikes, 'id'));
+        // $index = array_search($bike, array_column($bikes, 'id'));
+        
+        
         return view('bikes.show', [
-            'bike'=>$bikes[$index]
+            'bike'=>Bike::findOrFail($bike)
         ]);
     }
 
