@@ -79,9 +79,12 @@ class BikeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $bike)
     {
         //
+         return view('bikes.edit', [
+            'bike'=>Bike::findOrFail($bike)
+        ]);
     }
 
     /**
@@ -90,6 +93,20 @@ class BikeController extends Controller
     public function update(Request $request, string $id)
     {
         //
+         $request->validate([
+            'bike-name'=>'required',
+            'bike-brand'=>'required',
+            'bike-price'=>'required', 'integer'
+        ]);
+        //
+        $record = Bike::findOrFail($id);
+        $record->name = strip_tags($request->input('bike-name'));
+        $record->brand = strip_tags($request->input('bike-brand'));
+        $record->price = strip_tags($request->input('bike-price'));
+
+        $record->save();
+        return redirect()->route('bikes.show',$id);
+        
     }
 
     /**
